@@ -1,0 +1,10 @@
+404:
+  - Content-Type: text/plain
+  - '404: Page not found'
+303:
+  - Content-Type: text/html
+    Location: "/"
+  - Redirecting
+200:
+  - Content-Type: text/html
+  - woo
