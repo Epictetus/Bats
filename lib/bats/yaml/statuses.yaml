@@ -1,0 +1,17 @@
+404:
+  - Content-Type: text/plain
+  - '404: Page not found.'
+301:
+  - Content-Type: text/html
+    Location: '/'
+  - '301: Moved Permanently.'
+307:
+  - Content-Type: text/html
+    Location: '/'
+  - '307: Moved Temporarily.'
+200:
+  - Content-Type: text/html
+  - '200: Page Successfully Loaded.'
+500:
+  - Content-Type: text/html
+  - '500: Oh noes... an error.'
