@@ -16,7 +16,7 @@ require 'bats'
 
 class App < Bats
 	get '/' do
-		statusCode( 200 ).body 'Flap flap flap'
+		s( 200 ).body 'Flap flap flap'
 	end
 end
 

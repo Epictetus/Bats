@@ -24,14 +24,14 @@ class Bats
 	
 	def self.redirect l, isTemporary = true
 		i = ( isTemporary ) ? '307' : '301'
-		statusCode( i ).headers( :Location => l )
+		s( i ).headers( :Location => l )
 	end
 
-	def self.statusCode i
+	def self.s i
 		Class.new( ::HTTPResponse.const_get( "Status#{i}" ) )
 	end
 
-	def statusCode i
+	def s i
 		Class.new( ::HTTPResponse.const_get( "Status#{i}" ) )
 	end
 
@@ -60,7 +60,7 @@ class Bats
 				end
 			end
 		end
-		route ||= statusCode( 404 )
+		route ||= s( 404 )
 		args = ( matches ) ? [ env, *matches ] : [ env ]
 		begin
 			route = route.call( args ) if route.kind_of?( Proc )
@@ -68,7 +68,7 @@ class Bats
 		rescue
 			b = '<h1>Ooops... The code broke.</h1>'
 			b += "<h3>#{$!.to_s}</h3>#{$!.backtrace.join( '<br/>' )}"
-			route = statusCode(500).body b
+			route = s(500).body b
 			route.call( env )
 		end
 	end

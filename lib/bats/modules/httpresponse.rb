@@ -6,21 +6,22 @@ module HTTPResponse
 	class Response
 		extend ::Wizarding
 		
-		traits :status, :headers, :body
-		
-		def self.headers h
-			@traits[ :headers ] ||= {}
-			@traits[ :headers ].merge!( h )
-		end
-		
-		def self.body b
-			headers { 'Content-Length' => b.length }
-			@traits[ :body ] = b
-		end
+		traits :body, :headers, :status
 
 		def self.call env; new.call( env ); end
+		
+		def self.h h
+			@traits[:headers].merge!( h )
+			self
+		end
+		
+		def self.b b
+			@traits[:body] = b
+			self
+		end
 
 		def call env
+			@headers.merge! 'Content-Length' => @body.length
 			[ @status, @headers, @body ]
 		end
 	end
