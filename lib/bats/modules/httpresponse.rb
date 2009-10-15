@@ -14,7 +14,7 @@ module HTTPResponse
 		end
 		
 		def self.body b
-			headers { 'Content-Length', b.length }
+			headers { 'Content-Length' => b.length }
 			@traits[ :body ] = b
 		end
 
