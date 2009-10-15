@@ -27,8 +27,13 @@ class Bats
 		statusCode( i ).headers( :Location => l )
 	end
 
-	def self.statusCode i; ::HTTPResponse.const_get( "Status#{i}" ); end
-	def statusCode i; ::HTTPResponse.const_get( "Status#{i}" ); end
+	def self.statusCode i
+		Class.new( ::HTTPResponse.const_get( "Status#{i}" ) )
+	end
+
+	def statusCode i
+		Class.new( ::HTTPResponse.const_get( "Status#{i}" ) )
+	end
 
 	def self.call env; new.call( env ); end
 	def call env
