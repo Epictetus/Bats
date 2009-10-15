@@ -12,6 +12,11 @@ module HTTPResponse
 			@traits[ :headers ] ||= {}
 			@traits[ :headers ].merge!( h )
 		end
+		
+		def self.body b
+			headers { 'Content-Length', b.length }
+			@traits[ :body ] = b
+		end
 
 		def self.call env; new.call( env ); end
 
