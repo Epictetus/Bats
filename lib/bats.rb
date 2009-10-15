@@ -45,7 +45,7 @@ class Bats
 							matches = matches[ 1, matches.length - 1 ]
 							matches.map! do | i | 
 								i = ( i ) ? i : ''
-								i = i.to_i if i =~ /^[\d]+$/
+								i = i.to_i if i =~ /^\d+$/
 								i
 							end
 							route = b
