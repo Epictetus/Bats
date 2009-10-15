@@ -26,25 +26,11 @@ class Bats
 		i = ( isTemporary ) ? '307' : '301'
 		statusCode( i ).headers( :Location => l )
 	end
-	
+
+	def self.statusCode i; ::HTTPResponse.const_get( "Status#{i}" ); end
+	def statusCode i; ::HTTPResponse.const_get( "Status#{i}" ); end
+
 	def self.call env; new.call( env ); end
-
-	def statusCode i
-		::HTTPResponse.const_get( "Status#{i}" )
-	end
-	
-	def self.statusCode i
-		::HTTPResponse.const_get( "Status#{i}" )
-	end
-	
-	def self.pubDir
-		File.expand_path( '../../public', __FILE__ )
-	end
-	
-	def pubDir
-		File.expand_path( '../../public', __FILE__ )
-	end
-
 	def call env
 		method = env[ 'REQUEST_METHOD' ].downcase.to_sym
 		path = env[ 'PATH_INFO' ]
@@ -68,9 +54,6 @@ class Bats
 					end
 				end
 			end
-		end
-		if !route && path =~ /\./ then
-			route = ::Rack::File.new( pubDir ) if File.exist?( "#{pubDir}/#{path}" )
 		end
 		route ||= statusCode( 404 )
 		args = ( matches ) ? [ env, *matches ] : [ env ]
