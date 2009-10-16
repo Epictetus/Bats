@@ -63,7 +63,7 @@ class Bats
 		route ||= s( 404 )
 		args = ( matches ) ? [ env, *matches ] : [ env ]
 		begin
-			route = route.call( args ) if route.kind_of?( Proc )
+			route = route.call( *args ) if route.kind_of?( Proc )
 			route.call( env )
 		rescue
 			b = '<h1>Ooops... The code broke.</h1>'
