@@ -22,7 +22,7 @@ module HTTPResponse
 
 		def call env
 			@headers.merge! 'Content-Length' => @body.length.to_s
-			[ @status, @headers, @body ]
+			[ @status, @headers, [@body] ]
 		end
 	end
 	
